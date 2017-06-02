@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: 200ok
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: 200ok
+    spec:
+      containers:
+        - name: 200ok
+          image: jmhobbs/200ok:demo
+          ports:
+            - containerPort: 8080
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
