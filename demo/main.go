@@ -32,12 +32,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := response{"Hello Tulsa!", ""}
+	resp := response{"Hello World!", ""}
 
 	for _, e := range os.Environ() {
 		pair := strings.Split(e, "=")
 		if "POD_NAME" == pair[0] {
 			resp.Pod = pair[1]
+		} else if "MESSAGE" == pair[0] {
+			resp.Message = pair[1]
 		}
 	}
 
